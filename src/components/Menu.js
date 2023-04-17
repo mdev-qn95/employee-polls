@@ -1,7 +1,7 @@
 import { Row, Col, Nav, Button, Image } from "react-bootstrap";
 import login from "../images/login.png";
 
-const Header = () => {
+const Menu = () => {
   return (
     <Row className="mt-2">
       <Col>
@@ -27,4 +27,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Menu;
