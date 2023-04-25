@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { connect } from "react-redux";
 import "./App.css";
 import New from "./components/New";
 import Menu from "./components/Menu";
@@ -6,22 +8,52 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Leaderboard from "./components/Leaderboard";
 import PageNotFound from "./components/PageNotFound";
+import ProtectedRoute from "./util/ProtectedRoute";
+import { getDataInit } from "./store/shared/init";
 
-function App() {
+const App = ({ dispatch, loggedIn }) => {
+  useEffect(() => {
+    dispatch(getDataInit());
+  });
   return (
     <div className="App">
-      <Menu></Menu>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/leaderboard" exact element={<Leaderboard />} />
-          <Route path="/new" exact element={<New />} />
-          <Route path="/404" exact element={<PageNotFound />} />
-        </Routes>
-      </Router>
+      {loggedIn && <Menu></Menu>}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/login" exact element={<Login />} />
+        <Route
+          path="/leaderboard"
+          exact
+          element={
+            <ProtectedRoute>
+              <Leaderboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/new"
+          exact
+          element={
+            <ProtectedRoute>
+              <New />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/404" exact element={<PageNotFound />} />
+      </Routes>
     </div>
   );
-}
+};
 
-export default App;
+const mapStateToProps = ({ authed }) => ({
+  loggedIn: authed,
+});
+
+export default connect(mapStateToProps)(App);

@@ -1,11 +1,20 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import login from "../images/login.png";
+import { handleLogin } from "../store/actions/authedAction";
 
-const Login = () => {
-  const [user, setUser] = useState("zoshikanlu");
-  const [password, setPassword] = useState("pass246");
+const Login = ({ dispatch, loggedIn }) => {
+  const [user, setUser] = useState("johndoe");
+  const [password, setPassword] = useState("johndoe");
+
+  if (loggedIn) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectUrl = urlParams.get("redirectTo");
+    return <Navigate to={redirectUrl ? redirectUrl : "/"} />;
+  }
 
   const userOnChangeHandle = (e) => {
     const value = e.target.value;
@@ -19,6 +28,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(handleLogin(user, password));
     setUser("");
     setPassword("");
   };
@@ -65,4 +75,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = ({ authed }) => ({
+  loggedIn: authed,
+});
+
+export default connect(mapStateToProps)(Login);

@@ -1,30 +1,46 @@
-import { Row, Col, Nav, Button, Image } from "react-bootstrap";
+import { Row, Col, Nav, Image } from "react-bootstrap";
 import login from "../images/login.png";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { handleLogout } from "../store/actions/authedAction";
 
-const Menu = () => {
+const Menu = ({ dispatch, authedUserName }) => {
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(handleLogout());
+  };
   return (
-    <Row className="mt-2">
+    <Row className="mt-2 mb-5">
       <Col>
         <Nav defaultActiveKey="/" as="ul" className="justify-content-center">
-          <Nav.Item as="li">
-            <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Item as="li" className="mr-5">
+            <Link to="/">Home</Link>
           </Nav.Item>
-          <Nav.Item as="li">
-            <Nav.Link href="/leaderboard">Leaderboard</Nav.Link>
+          <Nav.Item as="li" className="mr-5">
+            <Link to="/leaderboard">Leaderboard</Link>
           </Nav.Item>
-          <Nav.Item as="li">
-            <Nav.Link href="/new">New</Nav.Link>
+          <Nav.Item as="li" className="mr-5">
+            <Link to="/new">New</Link>
           </Nav.Item>
-          <Nav.Item as="li">
-            <Nav.Link disabled>
-              <Image src={login} width="20px"></Image> MDev
-            </Nav.Link>
+          <Nav.Item as="li" className="mr-5">
+            <Image src={login} width="20px"></Image> {authedUserName}
           </Nav.Item>
-          <Button variant="light">Logout</Button>
+          <Nav.Item
+            as="li"
+            className="mr-5"
+            style={{ cursor: "pointer" }}
+            onClick={logout}
+          >
+            Logout
+          </Nav.Item>
         </Nav>
       </Col>
     </Row>
   );
 };
 
-export default Menu;
+const mapStateToProps = ({ authed }) => ({
+  authedUserName: authed.name,
+});
+
+export default connect(mapStateToProps)(Menu);
