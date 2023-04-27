@@ -1,9 +1,43 @@
-const Home = () => {
+import { connect } from "react-redux";
+import Card from "./Card";
+
+const Home = ({ authed, questions }) => {
   return (
-    <div>
-      <span>HOME</span>
+    <div className="home">
+      <div className="questions">
+        <div className="title">New Question</div>
+        <div className="list-card">
+          {questions
+            .filter(
+              (question) =>
+                !question.optionOne.votes.includes(authed.id) &&
+                !question.optionTwo.votes.includes(authed.id)
+            )
+            .map((question) => (
+              <Card key={question.id} question={question}></Card>
+            ))}
+        </div>
+      </div>
+      <div className="questions">
+        <div className="title">Done</div>
+        <div className="list-card">
+          {questions
+            .filter(
+              (question) =>
+                question.optionOne.votes.includes(authed.id) ||
+                question.optionTwo.votes.includes(authed.id)
+            )
+            .map((question) => (
+              <Card key={question.id} question={question}></Card>
+            ))}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Home;
+const mapStateToProps = ({ authed, questions }) => ({
+  authed,
+  questions: Object.values(questions),
+});
+export default connect(mapStateToProps)(Home);
