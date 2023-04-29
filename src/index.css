@@ -184,7 +184,7 @@ code {
 .leaderboard table,
 th,
 td {
-  border: 2px solid #576574;
+  border: 1px solid gray;
 }
 .leaderboard .styled-table thead tr {
   background-color: #2ecc71;

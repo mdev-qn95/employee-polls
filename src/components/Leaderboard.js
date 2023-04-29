@@ -1,9 +1,12 @@
-import login from "../images/login.png";
+import { connect } from "react-redux";
 
-const Leaderboard = () => {
+const Leaderboard = ({ users }) => {
+  const usersArr = Object.values(users).sort(
+    (a, b) => Object.keys(b.answers).length - Object.keys(a.answers).length
+  );
   return (
     <div className="leaderboard">
-      <table class="styled-table">
+      <table className="styled-table">
         <thead>
           <tr>
             <th>User</th>
@@ -12,38 +15,29 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div className="flex">
-                <img src={login} alt="" width="20px"></img>
-                <div>
-                  <span className="user-name">Hello</span>
-                  <br></br>
-                  <span className="user-id">World</span>
+          {usersArr.map((user) => (
+            <tr key={user.id}>
+              <td>
+                <div className="flex">
+                  <img src={user.avatarURL} alt="" width="20px"></img>
+                  <div>
+                    <span className="user-name">{user.name}</span>
+                    <br />
+                    <span className="user-id">{user.id}</span>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td>4</td>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>
-              <div className="flex">
-                <img src={login} alt="" width="20px"></img>
-                <div>
-                  <span className="user-name">Hello</span>
-                  <br></br>
-                  <span className="user-id">World</span>
-                </div>
-              </div>
-            </td>
-            <td>4</td>
-            <td>2</td>
-          </tr>
+              </td>
+              <td>4</td>
+              <td>2</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
   );
 };
 
-export default Leaderboard;
+const mapStateToProps = ({ users }) => ({
+  users,
+});
+export default connect(mapStateToProps)(Leaderboard);
