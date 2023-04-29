@@ -33,11 +33,14 @@ code {
 .home .questions .list-card {
   display: flex;
   justify-content: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
 }
 .home .questions .list-card .card-el {
   padding: 12px;
   margin: 12px;
   width: 300px;
+  min-width: 300px;
   height: 200px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

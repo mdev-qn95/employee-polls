@@ -12,21 +12,19 @@ const Card = ({ question }) => {
       month: "2-digit",
       year: "numeric",
     });
-    return `${formattedHours}:${formattedMinutes}${ampm} | ${formattedDate}`;
+    return `${formattedHours}:${formattedMinutes} ${ampm} | ${formattedDate}`;
   };
 
   return (
-    <div className="list-card">
-      <div className="card-el">
-        <div className="user-time">
-          <span className="user">{question.author}</span>
-          <span className="time">{formatDate(question.timestamp)}</span>
-        </div>
-        <div className="show">
-          <Link to={"questions/" + question.id}>
-            <button>Show</button>
-          </Link>
-        </div>
+    <div className="card-el">
+      <div className="user-time">
+        <span className="user">{question.author}</span>
+        <span className="time">{formatDate(question.timestamp)}</span>
+      </div>
+      <div className="show">
+        <Link to={"questions/" + question.id}>
+          <button>Show</button>
+        </Link>
       </div>
     </div>
   );

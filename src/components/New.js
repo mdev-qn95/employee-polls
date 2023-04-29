@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addPoll } from "../store/actions/questionsAction";
 
-const New = () => {
+const New = ({ dispatch }) => {
   const [firstVal, setFirstVal] = useState("");
   const [secondVal, setSecondVal] = useState("");
+  const navigate = useNavigate();
 
   const firstOptionChangeHandle = (e) => {
     const value = e.target.value;
@@ -17,6 +21,8 @@ const New = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(addPoll(firstVal, secondVal));
+    navigate("/");
   };
 
   return (
@@ -58,4 +64,4 @@ const New = () => {
   );
 };
 
-export default New;
+export default connect()(New);

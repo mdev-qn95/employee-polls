@@ -1,4 +1,4 @@
-import { GET_USERS } from "../actions/usersAction";
+import { ADD_USER_QUESTION, GET_USERS } from "../actions/usersAction";
 
 const usersReducers = (state = {}, action) => {
   switch (action.type) {
@@ -6,6 +6,14 @@ const usersReducers = (state = {}, action) => {
       return {
         ...state,
         ...action.users,
+      };
+    case ADD_USER_QUESTION:
+      return {
+        ...state,
+        [action.author]: {
+          ...state[action.author],
+          questions: state[action.author].questions.concat(action.qid),
+        },
       };
     default:
       return state;
