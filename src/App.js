@@ -10,6 +10,7 @@ import Leaderboard from "./components/Leaderboard";
 import PageNotFound from "./components/PageNotFound";
 import ProtectedRoute from "./util/ProtectedRoute";
 import { getDataInit } from "./store/shared/init";
+import Detail from "./components/Detail";
 
 const App = ({ dispatch, loggedIn }) => {
   useEffect(() => {
@@ -34,6 +35,15 @@ const App = ({ dispatch, loggedIn }) => {
           element={
             <ProtectedRoute>
               <Leaderboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/questions/:id"
+          exact
+          element={
+            <ProtectedRoute>
+              <Detail />
             </ProtectedRoute>
           }
         />
