@@ -1,8 +1,9 @@
-import { saveQuestion } from "../../util/api";
-import { addUserQuestion } from "./usersAction";
+import { saveAnswer, saveQuestion } from "../../util/api";
+import { addUserAnswer, addUserQuestion } from "./usersAction";
 
 export const GET_QUESTIONS = "GET_QUESTIONS";
 export const ADD_QUESTION = "ADD_QUESTION";
+export const ADD_ANSWER = "ADD_ANSWER";
 
 export const getQuestions = (questions) => {
   return {
@@ -26,5 +27,24 @@ const addQuestion = (data) => {
   return {
     type: ADD_QUESTION,
     question: data,
+  };
+};
+
+export const voteOption = (questionId, option) => {
+  return (dispatch, getState) => {
+    const { authed } = getState();
+    return saveAnswer(authed.id, questionId, option).then(() => {
+      dispatch(addAnswer(authed.id, questionId, option));
+      dispatch(addUserAnswer(authed.id, questionId, option));
+    });
+  };
+};
+
+const addAnswer = (author, questionId, option) => {
+  return {
+    type: ADD_ANSWER,
+    author,
+    questionId,
+    option,
   };
 };

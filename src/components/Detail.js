@@ -1,13 +1,16 @@
 import { connect } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import userImg from "../images/user.jpg";
+import { voteOption } from "../store/actions/questionsAction";
 
-const Detail = ({ authed, questions, users }) => {
+const Detail = ({ authed, questions, users, dispatch }) => {
   const pollId = useParams().id;
   const question = Object.values(questions).find(
     (question) => question.id === pollId
   );
   const user = Object.values(users).find((user) => user.id === question.author);
+
+  const navigate = useNavigate();
 
   if (!authed || !question || !user) {
     return <Navigate to="/404" />;
@@ -28,6 +31,11 @@ const Detail = ({ authed, questions, users }) => {
       default:
         return "0%";
     }
+  };
+
+  const voteOptionHandle = (option) => {
+    dispatch(voteOption(question.id, option));
+    navigate("/");
   };
 
   return (
@@ -51,7 +59,12 @@ const Detail = ({ authed, questions, users }) => {
                 {calcPercent(question, 1)})
               </span>
             ) : (
-              <button disabled={voted}>Click</button>
+              <button
+                disabled={voted}
+                onClick={() => voteOptionHandle("optionOne")}
+              >
+                Click
+              </button>
             )}
           </div>
         </div>
@@ -68,7 +81,12 @@ const Detail = ({ authed, questions, users }) => {
                 {calcPercent(question, 2)})
               </span>
             ) : (
-              <button disabled={voted}>Click</button>
+              <button
+                disabled={voted}
+                onClick={() => voteOptionHandle("optionTwo")}
+              >
+                Click
+              </button>
             )}
           </div>
         </div>
