@@ -36,6 +36,7 @@ const Login = ({ dispatch, loggedIn }) => {
     <Container className="mt-5">
       <Row>
         <Col>
+          <h2>Employee Polls</h2>
           <Image src={login} width="400px" alt="Login" />
         </Col>
       </Row>
@@ -43,7 +44,7 @@ const Login = ({ dispatch, loggedIn }) => {
         <Col>
           <h2>Log In</h2>
           <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="user">
+            <Form.Group controlId="user" className="mt-2">
               <Form.Label>User</Form.Label>
               <Form.Control
                 type="text"
@@ -54,7 +55,7 @@ const Login = ({ dispatch, loggedIn }) => {
               />
             </Form.Group>
 
-            <Form.Group controlId="password">
+            <Form.Group controlId="password" className="mt-2">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
