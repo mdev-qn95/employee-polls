@@ -3,7 +3,7 @@ import Card from "./Card";
 
 const Home = ({ authed, questions }) => {
   return (
-    <div className="home">
+    <div className="home" data-testid="home-page">
       <div className="questions">
         <div className="title">New Question</div>
         <div className="list-card">

@@ -33,7 +33,7 @@ const Login = ({ dispatch, loggedIn }) => {
     setPassword("");
   };
   return (
-    <Container className="mt-2">
+    <Container className="mt-2" data-testid="login-page">
       <Row>
         <Col>
           <h2>Employee Polls</h2>
