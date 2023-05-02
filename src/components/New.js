@@ -40,6 +40,7 @@ const New = ({ dispatch }) => {
                 placeholder="Option One"
                 value={firstVal}
                 onChange={firstOptionChangeHandle}
+                data-testid="option-one"
               />
             </Form.Group>
 
@@ -51,6 +52,7 @@ const New = ({ dispatch }) => {
                 placeholder="Option Two"
                 value={secondVal}
                 onChange={secondOptionChangeHandle}
+                data-testid="option-two"
               />
             </Form.Group>
 

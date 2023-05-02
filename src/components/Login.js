@@ -52,6 +52,7 @@ const Login = ({ dispatch, loggedIn }) => {
                 placeholder="User"
                 value={user}
                 onChange={userOnChangeHandle}
+                data-testid="user-id"
               />
             </Form.Group>
 
@@ -63,10 +64,16 @@ const Login = ({ dispatch, loggedIn }) => {
                 placeholder="Password"
                 value={password}
                 onChange={passwordOnChangeHandle}
+                data-testid="password"
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="mt-5">
+            <Button
+              variant="primary"
+              type="submit"
+              className="mt-5"
+              data-testid="submit"
+            >
               Submit
             </Button>
           </Form>
