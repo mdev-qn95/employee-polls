@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleLogout } from "../store/actions/authedAction";
 
-const Menu = ({ dispatch, authedUserName }) => {
+const Menu = ({ dispatch, authedUserId }) => {
   const logout = (e) => {
     e.preventDefault();
     dispatch(handleLogout());
@@ -23,7 +23,10 @@ const Menu = ({ dispatch, authedUserName }) => {
             <Link to="/add">New</Link>
           </Nav.Item>
           <Nav.Item as="li" className="mr-5">
-            <Image src={login} width="20px"></Image> {authedUserName}
+            <Image src={login} width="20px"></Image>
+            <span className="ml-10" data-testid="user-id">
+              {authedUserId}
+            </span>
           </Nav.Item>
           <Nav.Item
             as="li"
@@ -40,7 +43,7 @@ const Menu = ({ dispatch, authedUserName }) => {
 };
 
 const mapStateToProps = ({ authed }) => ({
-  authedUserName: authed.name,
+  authedUserId: authed.id,
 });
 
 export default connect(mapStateToProps)(Menu);

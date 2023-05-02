@@ -220,3 +220,7 @@ td {
   margin-right: 15px;
   transform: translateY(5px) scale(1.5);
 }
+
+.ml-10 {
+  margin-left: 10px;
+}

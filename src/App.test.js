@@ -7,7 +7,7 @@ import { store } from "./store";
 import { setAuthedUser } from "./store/actions/authedAction";
 
 describe("App", () => {
-  it("Render the component", () => {
+  it("will render the component", () => {
     const component = render(
       <Provider store={store}>
         <Router>
@@ -19,7 +19,7 @@ describe("App", () => {
     expect(component).toMatchSnapshot();
   });
 
-  it("Show Login page when not logged in", () => {
+  it("will show login page when user is not logged in", () => {
     const component = render(
       <Provider store={store}>
         <Router>
@@ -31,7 +31,7 @@ describe("App", () => {
     expect(loginPage).toBeInTheDocument();
   });
 
-  it("Show Home page when logged in", () => {
+  it("will show home page when user is logged in", () => {
     store.dispatch(setAuthedUser({ id: "johndoe", password: "johndoe" }));
 
     const component = render(
