@@ -15,10 +15,10 @@ export const handleLogin = (username, password) => {
   };
 };
 
-export const setAuthedUser = (authed) => {
+export const setAuthedUser = (user) => {
   return {
     type: SET_AUTHED,
-    authed,
+    authed: user.id,
   };
 };
 

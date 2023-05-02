@@ -10,8 +10,8 @@ const Home = ({ authed, questions }) => {
           {questions
             .filter(
               (question) =>
-                !question.optionOne.votes.includes(authed.id) &&
-                !question.optionTwo.votes.includes(authed.id)
+                !question.optionOne.votes.includes(authed) &&
+                !question.optionTwo.votes.includes(authed)
             )
             .map((question) => (
               <Card key={question.id} question={question}></Card>
@@ -24,8 +24,8 @@ const Home = ({ authed, questions }) => {
           {questions
             .filter(
               (question) =>
-                question.optionOne.votes.includes(authed.id) ||
-                question.optionTwo.votes.includes(authed.id)
+                question.optionOne.votes.includes(authed) ||
+                question.optionTwo.votes.includes(authed)
             )
             .map((question) => (
               <Card key={question.id} question={question}></Card>

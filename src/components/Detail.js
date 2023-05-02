@@ -16,8 +16,8 @@ const Detail = ({ authed, questions, users, dispatch }) => {
     return <Navigate to="/404" />;
   }
 
-  const votedOptionOne = question.optionOne.votes.includes(authed.id);
-  const votedOptionTwo = question.optionTwo.votes.includes(authed.id);
+  const votedOptionOne = question.optionOne.votes.includes(authed);
+  const votedOptionTwo = question.optionTwo.votes.includes(authed);
   const voted = votedOptionOne || votedOptionTwo;
 
   const calcPercent = (question, option) => {

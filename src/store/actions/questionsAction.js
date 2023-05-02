@@ -33,9 +33,9 @@ const addQuestion = (data) => {
 export const voteOption = (questionId, option) => {
   return (dispatch, getState) => {
     const { authed } = getState();
-    return saveAnswer(authed.id, questionId, option).then(() => {
-      dispatch(addAnswer(authed.id, questionId, option));
-      dispatch(addUserAnswer(authed.id, questionId, option));
+    return saveAnswer(authed, questionId, option).then(() => {
+      dispatch(addAnswer(authed, questionId, option));
+      dispatch(addUserAnswer(authed, questionId, option));
     });
   };
 };

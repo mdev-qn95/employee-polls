@@ -43,7 +43,7 @@ const Menu = ({ dispatch, authedUserId }) => {
 };
 
 const mapStateToProps = ({ authed }) => ({
-  authedUserId: authed.id,
+  authedUserId: authed,
 });
 
 export default connect(mapStateToProps)(Menu);
