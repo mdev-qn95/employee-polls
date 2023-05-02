@@ -20,7 +20,7 @@ const Menu = ({ dispatch, authedUserName }) => {
             <Link to="/leaderboard">Leaderboard</Link>
           </Nav.Item>
           <Nav.Item as="li" className="mr-5">
-            <Link to="/new">New</Link>
+            <Link to="/add">New</Link>
           </Nav.Item>
           <Nav.Item as="li" className="mr-5">
             <Image src={login} width="20px"></Image> {authedUserName}
