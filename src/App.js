@@ -57,6 +57,7 @@ const App = ({ dispatch, loggedIn }) => {
           }
         />
         <Route path="/404" exact element={<PageNotFound />} />
+        <Route path="*" exact element={<PageNotFound />} />
       </Routes>
     </div>
   );

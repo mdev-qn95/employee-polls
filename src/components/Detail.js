@@ -3,13 +3,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import userImg from "../images/user.jpg";
 import { voteOption } from "../store/actions/questionsAction";
 
-const Detail = ({ authed, questions, users, dispatch }) => {
-  const pollId = useParams().id;
-  const question = Object.values(questions).find(
-    (question) => question.id === pollId
-  );
-  const user = Object.values(users).find((user) => user.id === question.author);
-
+const Detail = ({ authed, question, user, dispatch }) => {
   const navigate = useNavigate();
 
   if (!authed || !question || !user) {
@@ -95,9 +89,17 @@ const Detail = ({ authed, questions, users, dispatch }) => {
   );
 };
 
-const mapStateToProps = ({ authed, questions, users }) => ({
-  authed,
-  questions,
-  users,
-});
+const mapStateToProps = ({ authed, questions, users }) => {
+  try {
+    const question = Object.values(questions).find(
+      (question) => question.id === useParams().id
+    );
+    const user = Object.values(users).find(
+      (user) => user.id === question.author
+    );
+    return { authed, question, user };
+  } catch (e) {
+    return <Navigate to="/404" />;
+  }
+};
 export default connect(mapStateToProps)(Detail);

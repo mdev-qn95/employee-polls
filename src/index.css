@@ -224,3 +224,9 @@ td {
 .ml-10 {
   margin-left: 10px;
 }
+
+.vbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

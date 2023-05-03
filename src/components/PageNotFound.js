@@ -1,7 +1,9 @@
+import notFound from "../images/page-not-found.jpg";
+
 const PageNotFound = () => {
   return (
-    <div>
-      <span>PAGE NOT FOUND</span>
+    <div className="vbox">
+      <img src={notFound} alt="" width="700px"></img>
     </div>
   );
 };

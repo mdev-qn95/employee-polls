@@ -5,7 +5,7 @@ const Home = ({ authed, questions }) => {
   return (
     <div className="home" data-testid="home-page">
       <div className="questions">
-        <div className="title">New Question</div>
+        <div className="title">UnAnswered</div>
         <div className="list-card">
           {questions
             .filter(
@@ -19,7 +19,7 @@ const Home = ({ authed, questions }) => {
         </div>
       </div>
       <div className="questions">
-        <div className="title">Done</div>
+        <div className="title">Answered</div>
         <div className="list-card">
           {questions
             .filter(
